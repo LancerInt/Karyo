@@ -32,7 +32,7 @@ export default function CapabilityExplorer() {
     <section className="section section--white" id="capabilities">
       <div className="wrap">
         <div className="section-head reveal">
-          <p className="eyebrow">Capabilities</p>
+          <p className="eyebrow"><span className="eyebrow__i">03</span> Capabilities</p>
           <h2 className="h-section">Six capabilities. One delivery platform.</h2>
         </div>
 
@@ -51,7 +51,6 @@ export default function CapabilityExplorer() {
                 onClick={() => setActive(i)}
                 onKeyDown={(e) => onKey(e, i)}
               >
-                <span className="n">{c.n}</span>
                 <span className="t">{c.t}</span>
                 <span className="chev" aria-hidden="true"><Arrow /></span>
               </button>

@@ -1,12 +1,7 @@
 import { useEffect, useRef } from 'react'
 import { useMotion } from '../lib/motion'
 
-const STRIP = [
-  { n: '01', t: 'Storage & handling' },
-  { n: '02', t: 'Water compatibility' },
-  { n: '03', t: 'Tank behaviour' },
-  { n: '04', t: 'Application format' },
-]
+const STRIP = ['Storage & handling', 'Water compatibility', 'Tank behaviour', 'Application format']
 
 export default function Application() {
   const bannerRef = useRef<HTMLDivElement>(null)
@@ -75,11 +70,12 @@ export default function Application() {
 
       <div className="section--ivory" style={{ paddingBlock: 'clamp(2rem, 4vw, 3rem)' }}>
         <div className="wrap">
+          <p className="eyebrow"><span className="eyebrow__i">05</span> Application factors</p>
           <div className="appstrip">
             {STRIP.map((s) => (
-              <div className="appstrip__cell" key={s.n}>
-                <span className="appstrip__n">{s.n}</span>
-                <h3>{s.t}</h3>
+              <div className="appstrip__cell" key={s}>
+                <span className="appstrip__tick" aria-hidden="true" />
+                <h3>{s}</h3>
               </div>
             ))}
           </div>

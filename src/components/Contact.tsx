@@ -97,7 +97,7 @@ export default function Contact() {
     <section className="section section--ivory" id="contact">
       <div className="wrap contact__grid">
         <div className="reveal">
-          <p className="eyebrow">Contact</p>
+          <p className="eyebrow"><span className="eyebrow__i">07</span> Contact</p>
           <h2 className="h-section">Tell us what you want to formulate.</h2>
           <p className="lede" style={{ marginTop: '1.25rem' }}>
             Share your active ingredients, intended application, and delivery requirements to start

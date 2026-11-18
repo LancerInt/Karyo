@@ -113,7 +113,7 @@ export default function Story() {
         <div className="wrap">
           <div className="story__mobile">
             <div className="section-head reveal" style={{ marginBottom: 0 }}>
-              <p className="eyebrow">Explore the platform</p>
+              <p className="eyebrow"><span className="eyebrow__i">02</span> Explore the platform</p>
               <h2 className="h-section" style={{ color: 'var(--on-dark)' }}>From protection to practical delivery.</h2>
             </div>
             {CH.map((c, i) => (

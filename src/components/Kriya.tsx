@@ -5,7 +5,7 @@ export default function Kriya() {
     <section className="section section--white">
       <div className="wrap kriya">
         <div className="reveal">
-          <p className="eyebrow">By Kriya</p>
+          <p className="eyebrow"><span className="eyebrow__i">06</span> By Kriya</p>
           <h2 className="h-section">A Kriya technology platform.</h2>
           <p className="lede" style={{ marginTop: '1.25rem' }}>
             Karyo brings a dedicated focus on active protection and delivery to Kriya&rsquo;s wider

@@ -1,6 +1,4 @@
 import { useEffect, useRef, useState } from 'react'
-import { useInView } from '../lib/hooks'
-import { useMotion } from '../lib/motion'
 
 type Combo = 'mm' | 'bb' | 'mb'
 
@@ -21,7 +19,7 @@ const LAYOUT: Record<Combo, { A: Slot; B: Slot }> = {
   mb: { A: { kind: 'm', left: '35%', scale: 1.0 }, B: { kind: 'b', left: '66%', scale: 1.0 } },
 }
 
-function Asset({ slot, float, floatRev }: { slot: Slot; float: boolean; floatRev: boolean }) {
+function Asset({ slot }: { slot: Slot }) {
   const img = slot.kind === 'm' ? MICRO : BOT
   return (
     <div
@@ -29,7 +27,6 @@ function Asset({ slot, float, floatRev }: { slot: Slot; float: boolean; floatRev
       style={{ left: slot.left, transform: `translate(-50%, -50%) scale(${slot.scale})` }}
     >
       <img
-        className={float ? `floating ${floatRev ? 'floating--rev' : ''}` : ''}
         src={img.src}
         srcSet={img.srcSet}
         sizes="(max-width: 820px) 45vw, 28vw"
@@ -48,27 +45,19 @@ export default function CombinationExplorer() {
   const [active, setActive] = useState<Combo>('mb')
   const pillRefs = useRef<(HTMLButtonElement | null)[]>([])
   const [ind, setInd] = useState<{ x: number; w: number }>({ x: 0, w: 0 })
-  const sectionRef = useRef<HTMLElement>(null)
-  const inView = useInView(sectionRef, '0px 0px -10% 0px')
-  const { motionOff } = useMotion()
 
   const idx = TABS.findIndex((t) => t.id === active)
   const cur = TABS[idx]
   const layout = LAYOUT[active]
-  const float = !motionOff && inView
 
   useEffect(() => {
-    const btn = pillRefs.current[idx]
-    if (btn) setInd({ x: btn.offsetLeft, w: btn.offsetWidth })
-  }, [idx])
-
-  useEffect(() => {
-    const onResize = () => {
+    const measure = () => {
       const btn = pillRefs.current[idx]
       if (btn) setInd({ x: btn.offsetLeft, w: btn.offsetWidth })
     }
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
+    measure()
+    window.addEventListener('resize', measure)
+    return () => window.removeEventListener('resize', measure)
   }, [idx])
 
   const onKey = (e: React.KeyboardEvent, i: number) => {
@@ -84,10 +73,10 @@ export default function CombinationExplorer() {
   }
 
   return (
-    <section className="section combx" id="combinations" ref={sectionRef}>
+    <section className="section combx" id="combinations">
       <div className="wrap">
         <div className="combx__head reveal">
-          <p className="eyebrow">Combinations</p>
+          <p className="eyebrow"><span className="eyebrow__i">04</span> Combinations</p>
           <h2 className="h-section">Different actives. A shared delivery approach.</h2>
         </div>
 
@@ -113,8 +102,8 @@ export default function CombinationExplorer() {
 
         <div className="combx__body" id="combx-panel" role="tabpanel" aria-labelledby={`pill-${active}`}>
           <div className="combx__stage reveal">
-            <Asset slot={layout.A} float={float} floatRev={false} />
-            <Asset slot={layout.B} float={float} floatRev />
+            <Asset slot={layout.A} />
+            <Asset slot={layout.B} />
             {/* shared carrier + connector shown only for the hybrid */}
             <svg className="combx__svg" viewBox="0 0 800 500" style={{ opacity: active === 'mb' ? 1 : 0, transition: 'opacity .5s ease' }} aria-hidden="true">
               <ellipse cx="400" cy="250" rx="320" ry="190" fill="none" stroke="#b7c7bd" strokeOpacity="0.4" strokeWidth="2" strokeDasharray="2 12" />
