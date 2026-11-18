@@ -2,7 +2,7 @@ import { Arrow } from './icons'
 
 export default function Hero() {
   return (
-    <section className="hero" id="top">
+    <section className="hero on-forest" id="top">
       <div className="hero__media">
         <img
           src="/img/karyo-hero.webp"
