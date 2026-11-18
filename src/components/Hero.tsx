@@ -1,52 +1,48 @@
-import HeroCanvas from './HeroCanvas'
 import { Arrow } from './icons'
 
 export default function Hero() {
   return (
     <section className="hero" id="top">
-      <div className="hero__poster" aria-hidden="true" />
-      <HeroCanvas />
-      <div className="hero__scrim" aria-hidden="true" />
-      <div className="hero__scrim--bottom" aria-hidden="true" />
+      <div className="hero__media">
+        <img
+          src="/img/karyo-hero.webp"
+          srcSet="/img/karyo-hero-800.webp 800w, /img/karyo-hero-1280.webp 1280w, /img/karyo-hero.webp 1600w"
+          sizes="100vw"
+          alt="A translucent protective sphere holding microbial and botanical actives, resting on a dew-covered leaf."
+          fetchPriority="high"
+          decoding="async"
+          width={1600}
+          height={900}
+        />
+      </div>
 
-      <div className="hero__inner">
+      <div className="hero__wrap">
         <div className="wrap">
-          <div className="hero__content">
-            <p className="eyebrow">Active Delivery &amp; Protection</p>
-            <h1 className="display-xl hero__title">
-              <span className="ln">Protect the active.</span>
-              <span className="ln ln2">Design the delivery.</span>
-            </h1>
-            <p className="hero__copy">
-              Karyo™ brings microbial and botanical actives into structured
-              agricultural delivery systems.
+          <div className="hero__copy">
+            <p className="eyebrow">Karyo™ by Kriya</p>
+            <h1 className="h-hero hero__title">Protection and delivery for agricultural actives.</h1>
+            <p className="hero__sub">
+              A platform for protecting, combining, and delivering microbial and botanical actives
+              in practical agricultural formulations.
             </p>
             <div className="hero__actions">
-              <a className="btn btn--primary" href="#platform">
-                Explore the Platform <Arrow />
+              <a className="btn btn--accent" href="#platform">
+                Explore Karyo <Arrow />
               </a>
-              <a className="btn btn--ghost" href="#enquiry">
+              <a className="btn btn--outline" href="#contact">
                 Discuss Your Project
               </a>
+            </div>
+            <div className="hero__tags">
+              <span>Microbial actives</span>
+              <span className="sep" aria-hidden="true" />
+              <span>Botanical actives</span>
+              <span className="sep" aria-hidden="true" />
+              <span>Multi-active systems</span>
             </div>
           </div>
         </div>
       </div>
-
-      <div className="hero__meta">
-        <span className="annot">
-          <span className="dot" />
-          Actives held within a protective matrix
-        </span>
-        <div className="conceptual-tag" style={{ marginTop: '0.6rem' }}>
-          Conceptual illustration
-        </div>
-      </div>
-
-      <a className="hero__scroll" href="#platform" aria-label="Scroll to platform">
-        <span className="rail" aria-hidden="true" />
-        Scroll
-      </a>
     </section>
   )
 }

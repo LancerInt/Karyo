@@ -1,92 +1,87 @@
 import { useRef, useState } from 'react'
-import { ComboGlyph, ComboViz } from '../illustrations/Diagrams'
+import { ComboViz, ComboSwatch, type Combo } from './Schematics'
 
-type Combo = 'mm' | 'bb' | 'mb'
-
-const OPTIONS: { id: Combo; idx: string; title: string; heading: string; desc: string }[] = [
+const TABS: { id: Combo; label: string; heading: string; desc: string }[] = [
   {
     id: 'mm',
-    idx: 'A',
-    title: 'Microbial + Microbial',
-    heading: 'Two microbial actives, one system',
-    desc: 'A supported direction for co-delivering more than one microbial active within a single protective matrix, so they can be handled and applied together.',
+    label: 'Microbial + Microbial',
+    heading: 'Microbial + Microbial',
+    desc: 'Explore delivery architectures that bring microbial actives together within a coordinated system.',
   },
   {
     id: 'bb',
-    idx: 'B',
-    title: 'Botanical + Botanical',
-    heading: 'Botanical actives, combined',
-    desc: 'A supported direction for bringing botanical actives together in one carrier, designed so a combined botanical approach travels as a single format.',
+    label: 'Botanical + Botanical',
+    heading: 'Botanical + Botanical',
+    desc: 'Explore carrier and matrix designs for combinations of botanical actives.',
   },
   {
     id: 'mb',
-    idx: 'C',
-    title: 'Microbial + Botanical',
-    heading: 'A hybrid of biology and botany',
-    desc: 'A supported direction for pairing microbial and botanical actives within one delivery system — the kind of cross-type combination Karyo is built to explore.',
+    label: 'Microbial + Botanical',
+    heading: 'Microbial + Botanical',
+    desc: 'Bring microbial and botanical actives into a shared delivery design, with compatibility considered for the intended formulation.',
   },
 ]
 
 export default function Combinations() {
   const [active, setActive] = useState<Combo>('mb')
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([])
-  const current = OPTIONS.find((o) => o.id === active)!
+  const current = TABS.find((t) => t.id === active)!
 
   const onKey = (e: React.KeyboardEvent, i: number) => {
-    if (e.key !== 'ArrowDown' && e.key !== 'ArrowUp' && e.key !== 'ArrowRight' && e.key !== 'ArrowLeft') return
+    const keys = ['ArrowDown', 'ArrowUp', 'ArrowRight', 'ArrowLeft', 'Home', 'End']
+    if (!keys.includes(e.key)) return
     e.preventDefault()
-    const dir = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : -1
-    const next = (i + dir + OPTIONS.length) % OPTIONS.length
-    setActive(OPTIONS[next].id)
+    let next = i
+    if (e.key === 'Home') next = 0
+    else if (e.key === 'End') next = TABS.length - 1
+    else {
+      const dir = e.key === 'ArrowDown' || e.key === 'ArrowRight' ? 1 : -1
+      next = (i + dir + TABS.length) % TABS.length
+    }
+    setActive(TABS[next].id)
     tabRefs.current[next]?.focus()
   }
 
   return (
-    <section className="section section--dark-rich">
+    <section className="section section--sage" id="combinations">
       <div className="wrap">
-        <div className="section-head reveal" style={{ maxWidth: '58ch' }}>
-          <p className="eyebrow">Combinations</p>
-          <h2 className="display-lg" style={{ color: 'var(--ivory)' }}>
-            A platform for different <span className="ital" style={{ color: 'var(--sage-200)' }}>active combinations.</span>
-          </h2>
+        <div className="combo__head reveal">
+          <div>
+            <p className="eyebrow">Combinations</p>
+            <h2 className="h-section">Different actives. A shared delivery approach.</h2>
+          </div>
+          <p className="lede" style={{ maxWidth: '38ch' }}>
+            Karyo supports the development of delivery systems around different active combinations.
+          </p>
         </div>
 
         <div className="combo__grid">
           <div className="combo__tabs reveal" role="tablist" aria-label="Active combinations" aria-orientation="vertical">
-            {OPTIONS.map((o, i) => (
+            {TABS.map((t, i) => (
               <button
-                key={o.id}
+                key={t.id}
                 ref={(el) => (tabRefs.current[i] = el)}
                 className="combo__tab"
                 role="tab"
-                id={`combo-tab-${o.id}`}
-                aria-selected={active === o.id}
+                id={`tab-${t.id}`}
+                aria-selected={active === t.id}
                 aria-controls="combo-panel"
-                tabIndex={active === o.id ? 0 : -1}
-                onClick={() => setActive(o.id)}
+                tabIndex={active === t.id ? 0 : -1}
+                onClick={() => setActive(t.id)}
                 onKeyDown={(e) => onKey(e, i)}
               >
-                <ComboGlyph type={o.id} className="combo__glyph" />
-                <span className="t">{o.title}</span>
-                <span className="idx">{o.idx}</span>
+                <ComboSwatch type={t.id} />
+                <span className="label">{t.label}</span>
               </button>
             ))}
           </div>
 
-          <div
-            className="combo__stage reveal"
-            id="combo-panel"
-            role="tabpanel"
-            aria-labelledby={`combo-tab-${active}`}
-          >
-            <ComboViz type={active} className="combo__viz" />
-            <div className="combo__desc">
-              <h3 className="display-sm">{current.heading}</h3>
-              <p>{current.desc}</p>
-            </div>
+          <div className="combo__panel reveal" data-delay="1" id="combo-panel" role="tabpanel" aria-labelledby={`tab-${active}`}>
+            <ComboViz type={active} />
+            <h3>{current.heading}</h3>
+            <p>{current.desc}</p>
             <p className="combo__note">
-              Shown as supported platform directions — not a claim that every
-              combination is compatible or commercially validated.
+              Compatibility and performance depend on the selected actives and formulation.
             </p>
           </div>
         </div>

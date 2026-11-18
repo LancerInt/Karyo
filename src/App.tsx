@@ -1,12 +1,11 @@
-import Nav from './components/Nav'
+import Header from './components/Header'
 import Hero from './components/Hero'
-import Platform from './components/Platform'
-import Story from './components/Story'
+import WhatKaryo from './components/WhatKaryo'
 import Capabilities from './components/Capabilities'
 import Combinations from './components/Combinations'
-import Delivery from './components/Delivery'
-import KriyaRelation from './components/KriyaRelation'
-import Enquiry from './components/Enquiry'
+import Application from './components/Application'
+import Kriya from './components/Kriya'
+import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { useRevealObserver } from './lib/hooks'
 
@@ -17,16 +16,15 @@ export default function App() {
       <a className="skip-link" href="#platform">
         Skip to content
       </a>
-      <Nav />
+      <Header />
       <main id="main">
         <Hero />
-        <Platform />
-        <Story />
+        <WhatKaryo />
         <Capabilities />
         <Combinations />
-        <Delivery />
-        <KriyaRelation />
-        <Enquiry />
+        <Application />
+        <Kriya />
+        <Contact />
       </main>
       <Footer />
     </>

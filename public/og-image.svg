@@ -1,23 +1,20 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">
   <defs>
-    <radialGradient id="g" cx="68%" cy="38%" r="70%">
-      <stop offset="0%" stop-color="#17543B" />
-      <stop offset="60%" stop-color="#0F3627" />
-      <stop offset="100%" stop-color="#0B2A1E" />
+    <radialGradient id="g" cx="74%" cy="40%" r="72%">
+      <stop offset="0%" stop-color="#0C3A2C" />
+      <stop offset="100%" stop-color="#082E23" />
     </radialGradient>
   </defs>
   <rect width="1200" height="630" fill="url(#g)" />
-  <g transform="translate(860 315)" opacity="0.9">
-    <circle r="150" fill="none" stroke="#A7C3A8" stroke-width="1.5" opacity="0.28" />
-    <circle r="110" fill="none" stroke="#A7C3A8" stroke-width="1.5" opacity="0.45" />
-    <circle r="72" fill="none" stroke="#A7C3A8" stroke-width="1.5" opacity="0.7" />
-    <circle r="34" fill="#D96B2B" />
-    <circle cx="96" cy="-60" r="7" fill="#E89B5E" />
-    <circle cx="-104" cy="40" r="5" fill="#A7C3A8" />
-    <circle cx="40" cy="120" r="6" fill="#C6D8BF" />
+  <g transform="translate(910 300)">
+    <circle r="150" fill="none" stroke="#9FBFA6" stroke-width="1.4" opacity="0.3" />
+    <circle r="150" fill="#1C5B44" opacity="0.4" />
+    <circle cx="40" cy="-30" r="12" fill="#E77928" />
+    <circle cx="-30" cy="40" r="9" fill="#F0E7C8" />
+    <circle cx="70" cy="60" r="7" fill="#F0E7C8" />
   </g>
-  <text x="90" y="250" font-family="Georgia, serif" font-size="78" fill="#F4EFE3" font-style="italic">Protect the active.</text>
-  <text x="90" y="340" font-family="Georgia, serif" font-size="78" fill="#F4EFE3" font-style="italic">Design the delivery.</text>
-  <text x="92" y="150" font-family="monospace" font-size="22" letter-spacing="6" fill="#E89B5E">ACTIVE DELIVERY &amp; PROTECTION</text>
-  <text x="92" y="430" font-family="sans-serif" font-size="27" fill="#A7C3A8">Karyo™ — a technology platform by Kriya</text>
+  <text x="90" y="150" font-family="'Inter', sans-serif" font-size="22" letter-spacing="4" fill="#E77928" font-weight="600">KARYO™ BY KRIYA</text>
+  <text x="86" y="270" font-family="'Manrope', sans-serif" font-size="66" fill="#F5F3EB" font-weight="800">Protection and delivery</text>
+  <text x="86" y="350" font-family="'Manrope', sans-serif" font-size="66" fill="#F5F3EB" font-weight="800">for agricultural actives.</text>
+  <text x="90" y="430" font-family="'Inter', sans-serif" font-size="25" fill="#AFC3B4">Microbial · Botanical · Multi-active delivery systems</text>
 </svg>

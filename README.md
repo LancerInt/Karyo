@@ -1,7 +1,7 @@
-# Karyo™ — Active Delivery & Protection Platform
+# Karyo™ — Protection & Delivery for Agricultural Actives
 
-A premium, responsive single-page marketing site for **Karyo™**, a technology platform by **Kriya**.
-Built with **React + TypeScript + Vite + Tailwind**, authored around a bespoke editorial design system.
+A responsive single-page marketing site for **Karyo™**, a technology platform by **Kriya**.
+Built with **React + TypeScript + Vite + Tailwind** and a bespoke, light-led design system.
 
 ## Run
 
@@ -11,34 +11,37 @@ npm run dev        # local dev server
 npm run build      # production build → dist/
 npm run preview    # serve the production build
 npm run typecheck  # tsc --noEmit
+node scripts/convert-images.mjs   # regenerate optimised WebP assets from assets/*.png
 ```
 
 ## Design system
 
-- **Palette** — deep forest (`#0B2A1E`), warm ivory (`#F4EFE3`), paper, restrained clay-orange accent (`#D96B2B`), soft sage. Light content bands alternate with immersive dark-green science bands.
-- **Type** — Fraunces (display), Hanken Grotesk (body), IBM Plex Mono (scientific annotation / data labels).
-- **Signature** — a lab-notebook *annotation system* (hairline leaders + mono labels) and a recurring protective-matrix ring motif. The hero is a lightweight canvas animation of actives held within a matrix, drifting toward a leaf surface; it falls back to a static poster under `prefers-reduced-motion`.
+- **Palette** — forest green `#082E23`, warm ivory `#F5F3EB`, white, orange accent `#E77928`, pale sage, body ink `#183A2E`. Predominantly light sections; forest green is reserved for the hero, the application banner, and emphasis.
+- **Type** — Manrope (headings) + Inter (body). Fluid scale: hero 40→72px, section headings 30→48px, body 17–18px.
+- **Imagery** — three supplied photographs are used as real assets, converted to responsive WebP:
+  - `karyo-hero.webp` — protective sphere on a leaf (full-bleed hero background, copy on the left).
+  - `karyo-matrix.webp` — open matrix on ivory ("What Karyo does").
+  - `karyo-field.webp` — crop field at dawn (application banner, text on the darker left).
+- **Diagrams** — the combination tabs use original labelled SVG schematics (shape + colour distinguish active types within a shared carrier). Capability icons are a consistent 24px line set.
+
+## Images
+
+Source PNGs live in `assets/`. `scripts/convert-images.mjs` (uses `sharp`) outputs optimised, responsive WebP into `public/img/` at the intended names plus smaller widths for `srcset`. The hero is preloaded and `fetchpriority="high"`; the matrix and field images are lazy-loaded.
 
 ## Accessibility & performance
 
-- One `<h1>`, semantic landmarks, skip link, visible focus states, labelled form inputs.
-- Keyboard support for the mobile menu (Esc to close), the combinations tablist (arrow keys), and the capabilities accordion.
-- Full `prefers-reduced-motion` support; the hero canvas pauses when the tab is hidden.
-- Responsive at 360 / 768 / 1024 / 1440px. SVG illustrations are inline and resolution-independent.
+- One `<h1>`, semantic landmarks, skip link, visible focus states, labelled inputs, descriptive `alt` text.
+- Keyboard support: mobile menu (Esc to close), combinations tablist (arrow / Home / End keys).
+- Transparent header over the hero switches to a solid, legible background after scrolling; sticky offset keeps anchor headings clear.
+- `prefers-reduced-motion` respected; the page is fully readable without animation.
+- No horizontal overflow at 360 / 390 / 768 / 1440px.
 
 ## Content & claims
 
-- All factual copy is grounded in Kriya's own Karyo page (`kriya.ltd/technology/karyo`). No patents, certifications, partners, testimonials, performance statistics, or safety/biodegradability claims are invented.
-- Diagrams are labelled **"Conceptual illustration"** and explain platform *functions* — they are not experimental evidence and do not depict a verified mechanism, cell penetration, targeted pest delivery, or a specific release mechanism.
-- Combination options are presented as *supported platform directions*, not validated results.
+All copy is grounded in Kriya's own Karyo page. No performance figures, shelf-life guarantees, patents, certifications, partners, product formats, safety claims, or controlled-release capabilities are invented. Qualifications are kept concise and next to the relevant claim (e.g. the matrix is labelled "Conceptual illustration"; the combinations note reads "Compatibility and performance depend on the selected actives and formulation.").
 
 ## Enquiry form
 
-No submission endpoint is configured, so the form uses an **honest email fallback**: on submit it opens the visitor's email client with a prefilled message to the verified address `info@kriya.ltd`. It never shows a false "submitted successfully" message.
+No server endpoint is configured, so the form opens the visitor's email app with the details prefilled to the verified address `info@kriya.ltd`, and the UI says so plainly — it never shows a confirmed-submission success state for the email path. Set `FORM_ENDPOINT` in [`src/components/Contact.tsx`](src/components/Contact.tsx) to enable live POST submission with a real success state.
 
-To wire up live submission, set `FORM_ENDPOINT` in [`src/components/Enquiry.tsx`](src/components/Enquiry.tsx) to a real POST endpoint — the success/error states are already implemented.
-
-## Notes
-
-Verified contact details (from kriya.ltd): `info@kriya.ltd` · +91 63858 48466 · wa.me/916385848466 · privacy: `kriya.ltd/policies#privacy`.
-The Kriya logo was not available as an approved asset, so Karyo is rendered as a refined text wordmark per the brief.
+Verified contact details: `info@kriya.ltd` · +91 63858 48466 · wa.me/916385848466 · privacy: `kriya.ltd/policies#privacy`.

@@ -3,17 +3,17 @@ import { Arrow } from './icons'
 
 const LINKS = [
   { href: '#platform', label: 'Platform' },
-  { href: '#how', label: 'How It Works' },
   { href: '#capabilities', label: 'Capabilities' },
-  { href: '#applications', label: 'Applications' },
+  { href: '#combinations', label: 'Combinations' },
+  { href: '#contact', label: 'Contact' },
 ]
 
-export default function Nav() {
+export default function Header() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
 
   useEffect(() => {
-    const onScroll = () => setSolid(window.scrollY > 40)
+    const onScroll = () => setSolid(window.scrollY > 32)
     onScroll()
     window.addEventListener('scroll', onScroll, { passive: true })
     return () => window.removeEventListener('scroll', onScroll)
@@ -30,37 +30,30 @@ export default function Nav() {
   }, [open])
 
   return (
-    <header className={`nav ${solid || open ? 'nav--solid' : ''}`}>
-      <div className="wrap nav__inner">
-        <div className="nav__brand">
-          <a href="#top" aria-label="Karyo — home" style={{ display: 'inline-flex' }}>
-            <span className="nav__word">
-              Karyo<span className="nav__tm">™</span>
+    <header className={`hdr ${solid || open ? 'hdr--solid' : ''}`}>
+      <div className="wrap hdr__inner">
+        <div className="brand">
+          <a href="#top" aria-label="Karyo — home" style={{ display: 'inline-flex', alignItems: 'baseline' }}>
+            <span className="brand__word">
+              Karyo<span className="brand__tm">™</span>
             </span>
           </a>
-          <a
-            className="nav__by"
-            href="https://kriya.ltd/"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By Kriya
-          </a>
+          <span className="brand__by">By Kriya</span>
         </div>
 
-        <nav className="nav__links" aria-label="Primary">
+        <nav className="hdr__nav" aria-label="Primary">
           {LINKS.map((l) => (
-            <a key={l.href} className="nav__link" href={l.href}>
+            <a key={l.href} className="hdr__link" href={l.href}>
               {l.label}
             </a>
           ))}
-          <a className="btn btn--primary nav__cta" href="#enquiry">
-            Discuss Your Project <Arrow />
+          <a className="btn btn--accent btn--sm" href="#contact">
+            Discuss Your Project
           </a>
         </nav>
 
         <button
-          className="nav__burger"
+          className="hdr__burger"
           aria-label={open ? 'Close menu' : 'Open menu'}
           aria-expanded={open}
           aria-controls="mobile-menu"
@@ -72,13 +65,13 @@ export default function Nav() {
         </button>
       </div>
 
-      <div id="mobile-menu" className={`nav__panel ${open ? 'nav__panel--open' : ''}`}>
+      <div id="mobile-menu" className={`hdr__panel ${open ? 'hdr__panel--open' : ''}`}>
         {LINKS.map((l) => (
           <a key={l.href} href={l.href} onClick={() => setOpen(false)}>
             {l.label}
           </a>
         ))}
-        <a className="btn btn--primary" href="#enquiry" onClick={() => setOpen(false)}>
+        <a className="btn btn--accent" href="#contact" onClick={() => setOpen(false)}>
           Discuss Your Project <Arrow />
         </a>
       </div>
