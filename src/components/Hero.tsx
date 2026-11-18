@@ -1,9 +1,16 @@
+import { useRef } from 'react'
 import { Arrow } from './icons'
+import { usePointerParallax } from '../lib/hooks'
+import { useMotion } from '../lib/motion'
 
 export default function Hero() {
+  const mediaRef = useRef<HTMLDivElement>(null)
+  const { motionOff } = useMotion()
+  usePointerParallax(mediaRef, 10, !motionOff)
+
   return (
     <section className="hero on-forest" id="top">
-      <div className="hero__media">
+      <div className="hero__media" ref={mediaRef}>
         <img
           src="/img/karyo-hero.webp"
           srcSet="/img/karyo-hero-800.webp 800w, /img/karyo-hero-1280.webp 1280w, /img/karyo-hero.webp 1600w"
@@ -20,14 +27,18 @@ export default function Hero() {
         <div className="wrap">
           <div className="hero__copy">
             <p className="eyebrow">Karyo™ by Kriya</p>
-            <h1 className="h-hero hero__title">Protection and delivery for agricultural actives.</h1>
+            <h1 className="h-hero hero__title">
+              <span className="ln ln1">Protect.</span>
+              <span className="ln ln2">Combine.</span>
+              <span className="ln ln3">Deliver.</span>
+            </h1>
             <p className="hero__sub">
-              A platform for protecting, combining, and delivering microbial and botanical actives
-              in practical agricultural formulations.
+              Karyo™ is Kriya&rsquo;s delivery and protection platform for microbial and botanical
+              actives.
             </p>
             <div className="hero__actions">
-              <a className="btn btn--accent" href="#platform">
-                Explore Karyo <Arrow />
+              <a className="btn btn--accent" href="#story">
+                Explore the Technology <Arrow />
               </a>
               <a className="btn btn--outline" href="#contact">
                 Discuss Your Project

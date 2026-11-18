@@ -18,11 +18,20 @@ node scripts/convert-images.mjs   # regenerate optimised WebP assets from assets
 
 - **Palette** — forest green `#082E23`, warm ivory `#F5F3EB`, white, orange accent `#E77928`, pale sage, body ink `#183A2E`. Predominantly light sections; forest green is reserved for the hero, the application banner, and emphasis.
 - **Type** — Manrope (headings) + Inter (body). Fluid scale: hero 40→72px, section headings 30→48px, body 17–18px.
-- **Imagery** — three supplied photographs are used as real assets, converted to responsive WebP:
-  - `karyo-hero.webp` — protective sphere on a leaf (full-bleed hero background, copy on the left).
-  - `karyo-matrix.webp` — open matrix on ivory ("What Karyo does").
-  - `karyo-field.webp` — crop field at dawn (application banner, text on the darker left).
-- **Diagrams** — the combination tabs use original labelled SVG schematics (shape + colour distinguish active types within a shared carrier). Capability icons are a consistent 24px line set.
+- **Imagery** — supplied illustrations used as real assets, converted to responsive WebP (alpha preserved on the two transparent foreground assets):
+  - `karyo-hero.webp` — protective sphere on a leaf (full-bleed hero background, with pointer parallax).
+  - `karyo-matrix.webp` — open matrix on ivory (Protect chapter supporting art).
+  - `karyo-field.webp` — crop field at dawn (application banner, scroll-linked translate).
+  - `karyo-microbial.webp` / `karyo-botanical.webp` — transparent foreground layers used in the Combine chapter and the combination explorer.
+- **Diagrams** — original labelled SVG schematics (not the raster images) explain the platform in the story, capability, and combination sections.
+
+## Interactions (one custom motion system — React hooks + CSS transforms, no extra framework)
+
+- **Hero** — CSS entrance sequence (image scale 1.04→1, staggered headline lines, copy/buttons), plus restrained desktop pointer parallax on the image only.
+- **Protect / Combine / Deliver story** — a ~220vh sticky scroll section on desktop (native scroll, no hijacking); the pinned stage swaps between three SVG+raster states driven by scroll, and the numbered controls also select directly. Collapses to three stacked tap-selectable chapters on mobile and under reduced-motion.
+- **Capability explorer** — a numbered list drives a labelled SVG that redraws per selection (keyboard + pointer, roving tabindex).
+- **Combination explorer** — three pill controls with a sliding indicator cross-fade two transparent asset compositions; the hybrid adds an SVG connector and shared carrier outline.
+- **Global** — thin scroll-progress bar, header transparent→solid, section reveals, gentle floating artwork (paused offscreen), and a fixed **Pause motion** control. `prefers-reduced-motion` exposes all content statically.
 
 ## Images
 

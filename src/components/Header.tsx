@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react'
 import { Arrow } from './icons'
+import { useScrollProgress } from '../lib/hooks'
 
 const LINKS = [
   { href: '#platform', label: 'Platform' },
+  { href: '#story', label: 'Explore' },
   { href: '#capabilities', label: 'Capabilities' },
   { href: '#combinations', label: 'Combinations' },
   { href: '#contact', label: 'Contact' },
@@ -11,6 +13,7 @@ const LINKS = [
 export default function Header() {
   const [solid, setSolid] = useState(false)
   const [open, setOpen] = useState(false)
+  const progress = useScrollProgress()
 
   useEffect(() => {
     const onScroll = () => setSolid(window.scrollY > 32)
@@ -63,6 +66,10 @@ export default function Header() {
           <span />
           <span />
         </button>
+      </div>
+
+      <div className="progress" aria-hidden="true">
+        <div className="progress__bar" style={{ transform: `scaleX(${progress})` }} />
       </div>
 
       <div id="mobile-menu" className={`hdr__panel ${open ? 'hdr__panel--open' : ''}`}>

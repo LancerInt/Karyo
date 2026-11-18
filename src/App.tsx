@@ -1,13 +1,15 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
-import WhatKaryo from './components/WhatKaryo'
-import Capabilities from './components/Capabilities'
-import Combinations from './components/Combinations'
+import Intro from './components/Intro'
+import Story from './components/Story'
+import CapabilityExplorer from './components/CapabilityExplorer'
+import CombinationExplorer from './components/CombinationExplorer'
 import Application from './components/Application'
 import Kriya from './components/Kriya'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import { useRevealObserver } from './lib/hooks'
+import { PauseMotionButton } from './lib/motion'
 
 export default function App() {
   useRevealObserver()
@@ -19,14 +21,16 @@ export default function App() {
       <Header />
       <main id="main">
         <Hero />
-        <WhatKaryo />
-        <Capabilities />
-        <Combinations />
+        <Intro />
+        <Story />
+        <CapabilityExplorer />
+        <CombinationExplorer />
         <Application />
         <Kriya />
         <Contact />
       </main>
       <Footer />
+      <PauseMotionButton />
     </>
   )
 }

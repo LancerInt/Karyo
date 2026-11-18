@@ -13,6 +13,9 @@ const jobs = [
   { src: 'Emerald protective sphere above a leaf-1.png', base: 'karyo-hero', widths: [1600, 1280, 800], q: 80 },
   { src: 'Sage hydrogel matrix revealing active core-2.png', base: 'karyo-matrix', widths: [1100, 700], q: 82 },
   { src: 'Dew-kissed crops at dawn-3.png', base: 'karyo-field', widths: [1600, 1280, 800], q: 80 },
+  // transparent foreground assets — alpha preserved
+  { src: 'Sage and emerald microbial cluster-1.png', base: 'karyo-microbial', widths: [900, 560], q: 86, alpha: true },
+  { src: 'Emerald leaves with amber botanical droplets-2.png', base: 'karyo-botanical', widths: [900, 560], q: 86, alpha: true },
 ]
 
 for (const job of jobs) {
@@ -27,9 +30,9 @@ for (const job of jobs) {
     const name = w === primary ? `${job.base}.webp` : `${job.base}-${w}.webp`
     await sharp(input)
       .resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: job.q, effort: 5 })
+      .webp({ quality: job.q, effort: 5, alphaQuality: 100, ...(job.alpha ? {} : {}) })
       .toFile(join(outDir, name))
-    console.log(`${name}  (${w}w)`)
+    console.log(`${name}  (${w}w)${job.alpha ? '  [alpha]' : ''}`)
   }
 }
 console.log('done')
