@@ -1,36 +1,30 @@
 import Header from './components/Header'
 import Hero from './components/Hero'
-import Intro from './components/Intro'
-import Story from './components/Story'
-import CapabilityExplorer from './components/CapabilityExplorer'
-import CombinationExplorer from './components/CombinationExplorer'
-import Application from './components/Application'
-import Kriya from './components/Kriya'
-import Contact from './components/Contact'
+import PlatformStatement from './components/PlatformStatement'
+import Sequence from './components/Sequence'
+import ActiveSystems from './components/ActiveSystems'
+import Capabilities from './components/Capabilities'
+import Partnership from './components/Partnership'
 import Footer from './components/Footer'
-import { useRevealObserver } from './lib/hooks'
-import { PauseMotionButton } from './lib/motion'
+import { useReveal } from './lib/hooks'
 
 export default function App() {
-  useRevealObserver()
+  useReveal()
   return (
     <>
-      <a className="skip-link" href="#platform">
+      <a className="skip-link" href="#main">
         Skip to content
       </a>
       <Header />
       <main id="main">
         <Hero />
-        <Intro />
-        <Story />
-        <CapabilityExplorer />
-        <CombinationExplorer />
-        <Application />
-        <Kriya />
-        <Contact />
+        <PlatformStatement />
+        <Sequence />
+        <ActiveSystems />
+        <Capabilities />
+        <Partnership />
       </main>
       <Footer />
-      <PauseMotionButton />
     </>
   )
 }

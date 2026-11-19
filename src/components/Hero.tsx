@@ -1,21 +1,14 @@
-import { useRef } from 'react'
 import { Arrow } from './icons'
-import { usePointerParallax } from '../lib/hooks'
-import { useMotion } from '../lib/motion'
 
 export default function Hero() {
-  const mediaRef = useRef<HTMLDivElement>(null)
-  const { motionOff } = useMotion()
-  usePointerParallax(mediaRef, 10, !motionOff)
-
   return (
-    <section className="hero on-forest" id="top">
-      <div className="hero__media" ref={mediaRef}>
+    <section className="hero on-dark" id="top">
+      <div className="hero__media">
         <img
-          src="/img/karyo-hero.webp"
-          srcSet="/img/karyo-hero-800.webp 800w, /img/karyo-hero-1280.webp 1280w, /img/karyo-hero.webp 1600w"
+          src="/img/karyo-hero-leaf.webp"
+          srcSet="/img/karyo-hero-leaf-800.webp 800w, /img/karyo-hero-leaf-1280.webp 1280w, /img/karyo-hero-leaf.webp 1600w"
           sizes="100vw"
-          alt="A translucent protective sphere holding microbial and botanical actives, resting on a dew-covered leaf."
+          alt="A dew droplet resting on a sunlit green leaf."
           fetchPriority="high"
           decoding="async"
           width={1600}
@@ -26,30 +19,23 @@ export default function Hero() {
       <div className="hero__wrap">
         <div className="wrap">
           <div className="hero__copy">
-            <p className="eyebrow">Karyo™ by Kriya</p>
-            <h1 className="h-hero hero__title">
-              <span className="ln ln1">Protect.</span>
-              <span className="ln ln2">Combine.</span>
-              <span className="ln ln3">Deliver.</span>
+            <p className="eyebrow">Karyo™ — a Kriya technology platform</p>
+            <h1 className="h-display hero__title">
+              Active protection.
+              <br />
+              Considered delivery.
             </h1>
             <p className="hero__sub">
-              Karyo™ is Kriya&rsquo;s delivery and protection platform for microbial and botanical
-              actives.
+              Delivery systems for microbial and botanical actives—designed around protection,
+              combination, and practical agricultural use.
             </p>
             <div className="hero__actions">
-              <a className="btn btn--accent" href="#story">
-                Explore the Technology <Arrow />
+              <a className="btn btn--accent" href="#sequence">
+                Explore the platform <Arrow />
               </a>
-              <a className="btn btn--outline" href="#contact">
-                Discuss Your Project
+              <a className="btn btn--ghost" href="#partner">
+                Discuss your formulation
               </a>
-            </div>
-            <div className="hero__tags">
-              <span>Microbial actives</span>
-              <span className="sep" aria-hidden="true" />
-              <span>Botanical actives</span>
-              <span className="sep" aria-hidden="true" />
-              <span>Multi-active systems</span>
             </div>
           </div>
         </div>

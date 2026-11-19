@@ -1,38 +1,40 @@
 import sharp from 'sharp'
-import { mkdirSync } from 'node:fs'
+import { mkdir, readdir, unlink } from 'node:fs/promises'
 import { fileURLToPath } from 'node:url'
 import { dirname, join } from 'node:path'
 
-const root = join(dirname(fileURLToPath(import.meta.url)), '..')
-const srcDir = join(root, 'assets')
-const outDir = join(root, 'public', 'img')
-mkdirSync(outDir, { recursive: true })
+const __dirname = dirname(fileURLToPath(import.meta.url))
+const ASSETS = join(__dirname, '..', 'assets')
+const OUT = join(__dirname, '..', 'public', 'img')
 
-// source PNG → [intended output base, responsive widths]
-const jobs = [
-  { src: 'Emerald protective sphere above a leaf-1.png', base: 'karyo-hero', widths: [1600, 1280, 800], q: 80 },
-  { src: 'Sage hydrogel matrix revealing active core-2.png', base: 'karyo-matrix', widths: [1100, 700], q: 82 },
-  { src: 'Dew-kissed crops at dawn-3.png', base: 'karyo-field', widths: [1600, 1280, 800], q: 80 },
-  // transparent foreground assets — alpha preserved
-  { src: 'Sage and emerald microbial cluster-1.png', base: 'karyo-microbial', widths: [900, 560], q: 86, alpha: true },
-  { src: 'Emerald leaves with amber botanical droplets-2.png', base: 'karyo-botanical', widths: [900, 560], q: 86, alpha: true },
+/* Photographic assets for the editorial rebuild. All opaque — no alpha.
+   Primary (largest usable width) gets the base name; smaller widths feed srcset. */
+const JOBS = [
+  { src: 'Water droplet on a green leaf-4.png', base: 'karyo-hero-leaf', widths: [1600, 1280, 800] },
+  { src: 'Soft dawn over young crop rows-1.png', base: 'karyo-application', widths: [1600, 1280, 800] },
+  { src: 'Botanical Samples in Warm Ivory Light-5.png', base: 'karyo-contact', widths: [1600, 1280, 800] },
+  { src: 'Swirling Ivory Liquid in Glass Vessel-2.png', base: 'karyo-formulation-study', widths: [1400, 900, 600] },
+  { src: 'Glass petri dishes on ivory stone-6.png', base: 'karyo-microbial-study', widths: [900, 560] },
+  { src: 'Neem sprig beside amber vial-3.png', base: 'karyo-botanical-study', widths: [900, 560] },
 ]
 
-for (const job of jobs) {
-  const input = join(srcDir, job.src)
+await mkdir(OUT, { recursive: true })
+
+// clear previous outputs so stale images never ship
+for (const f of await readdir(OUT)) {
+  if (f.endsWith('.webp')) await unlink(join(OUT, f))
+}
+
+for (const job of JOBS) {
+  const input = join(ASSETS, job.src)
   const meta = await sharp(input).metadata()
-  // widths we can actually produce (never upscale); ensure at least the native width
-  let usable = job.widths.filter((w) => w <= meta.width)
-  if (usable.length === 0) usable = [meta.width]
-  const primary = Math.max(...usable)
-  for (const w of usable) {
-    // the largest produced width keeps the intended output name (e.g. karyo-hero.webp)
+  const usable = job.widths.filter((w) => w <= meta.width).sort((a, b) => b - a)
+  const widths = usable.length ? usable : [Math.min(meta.width, ...job.widths)]
+  const primary = Math.max(...widths)
+  for (const w of widths) {
     const name = w === primary ? `${job.base}.webp` : `${job.base}-${w}.webp`
-    await sharp(input)
-      .resize({ width: w, withoutEnlargement: true })
-      .webp({ quality: job.q, effort: 5, alphaQuality: 100, ...(job.alpha ? {} : {}) })
-      .toFile(join(outDir, name))
-    console.log(`${name}  (${w}w)${job.alpha ? '  [alpha]' : ''}`)
+    await sharp(input).resize({ width: w }).webp({ quality: 80 }).toFile(join(OUT, name))
+    console.log('✓', name, `(${w}w of ${meta.width})`)
   }
 }
-console.log('done')
+console.log('Done.')
