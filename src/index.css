@@ -903,18 +903,14 @@ p {
 .contact__details {
   margin-top: 1.75rem;
   display: grid;
-  gap: 0;
+  gap: 0.55rem;
 }
 .contact__row {
   display: grid;
   grid-template-columns: 6rem 1fr;
   gap: 1rem;
-  padding: 0.85rem 0;
-  border-top: 1px solid var(--line);
+  padding: 0.35rem 0;
   align-items: baseline;
-}
-.contact__row:first-child {
-  border-top: 0;
 }
 .contact__row .k {
   font-size: 0.74rem;
@@ -925,11 +921,9 @@ p {
 }
 .contact__row a {
   font-weight: 500;
-  border-bottom: 1px solid var(--line-2);
-  padding-bottom: 1px;
+  transition: color 0.2s var(--ease);
 }
 .contact__row a:hover {
-  border-color: var(--orange);
   color: var(--orange);
 }
 
